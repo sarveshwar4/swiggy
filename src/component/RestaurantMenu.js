@@ -1,15 +1,9 @@
-import { useEffect } from "react";
+import useRestrauntMenu from "../utils/useRestrauntMenu";
+import { useParams } from "react-router";
 const RestaurantMenu = () => {
-  const fetchData = async () => {
-    const data = await fetch("http://localhost:4000/rest/123");
-    console.log("Status:", data.status);
-    console.log("OK:", data.ok);
-    const text = await data.text()
-    console.log("Data:", text);
-  };
-   useEffect(() => {
-    fetchData();
-  }, []);
+  const params = useParams();
+  console.log(params);
+  const info = useRestrauntMenu("123");
   return (
     <div>
       <h1>Hello World REst</h1>

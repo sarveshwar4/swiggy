@@ -1,6 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const User = (props) =>{
     const [count] = useState(0);
+    useEffect(()=>{
+       timer = setInterval(()=>{
+        console.log("Hello from User Interval");
+       }, 1000);
+       
+       return ()=>{
+        clearInterval(timer);
+          console.log("User Component Unmounted");
+       }
+    }, [count]);
     return (
        <div className="user-card">
             <h1>{count}</h1>
@@ -10,5 +20,4 @@ const User = (props) =>{
        </div>
     );
 }
-
 export default User;
