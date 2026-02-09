@@ -1,10 +1,10 @@
-import { useEffect } from "react";
-const useRestrauntMenu = (resid) => {
-    const [resInfo, setResInfo] = useState(null);
+import { useEffect, useState } from "react";
+const useRestrauntMenu = () => {
+    const [resInfo, setResInfo] = useState([]);
     const getResInfo = async () => {
-        const data = await fetch("http://localhost:4000/rest/" + resid);
-        // const json = await data?.json();
-        // setResInfo(json);
+        const data = await fetch("https://dummyjson.com/recipes");
+        const json = await data?.json();
+        setResInfo(json.recipes);
     }
     useEffect(() => {
         getResInfo();

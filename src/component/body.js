@@ -1,15 +1,21 @@
-import { useState, useEffect } from "react";
-import RestaurantCard from "./restaurantcard";
+import { useState, useEffect, useContext } from "react";
+import RestaurantCard, {PromotedRestraunt} from "./restaurantcard";
 import SeemerUi from "./seemer-ui";
-
+import UserContext from "../utils/UserContext";
 const Body = () => {
 
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
   const [filteredList, setfilteredList] = useState([]);
+ 
+  const PromotedRestaurantCard = PromotedRestraunt(RestaurantCard);
+  
 
   const [SearchText, setSearchText] = useState("");
 
+  const {user, setUser} = useContext(UserContext);
+
+  
 
   const fetchData = async () => {
     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999998&page_type=DESKTOP_WEB_LISTING");
@@ -17,7 +23,6 @@ const Body = () => {
     setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     // console.log(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     setfilteredList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    // console.log(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   }
   useEffect(()=>{
     fetchData();
@@ -39,16 +44,16 @@ const Body = () => {
             const filterList = listOfRestaurants.filter(
             (res) => res.info.avgRating > 4);
             setfilteredList(filterList);
-          }}
-        >
-          Top Rated Restaurants</button>
+          }}>Top Rated Restaurants</button>
         </div>
+
+        <label className="p-1">UserName:</label>
+        <input type = "text" className="border border-black p-2 m-1" value = {user.name} onChange={(e)=>setUser({...user, name: e.target.value})}/>
+        
       </div>
       <div className="res-container flex flex-wrap ml-4">
         {filteredList.map((restaurant) => (
-          <RestaurantCard
-            key={restaurant.info.id}
-            resData={restaurant}/>
+          restaurant.info.avgRating  >= 4.5 ? <PromotedRestaurantCard resData = {restaurant} key ={restaurant.info.id}/> : <RestaurantCard resData = {restaurant} key ={restaurant.info.id}/>
         ))}
       </div>
     </div>
