@@ -1,0 +1,13 @@
+for setup the testing step need to follow
+1-> install the react testing library
+2->install jest
+3-> install babel
+3-> add config babel config file babel.config.jest(
+    this overide parcel babel file, parcel uses babel behind the schene so for disabling the 
+    babel transpilation in parcel need to write the config parcel.rc(
+        this config find on parcel official docs go parcel docs then go left side find the js 
+        then click on it go right side and click babel and scroll down you find the other tool
+        where you find the config of parcel
+    )
+)
+final write the test = "jest" in script so you can use the cmd npm run test 

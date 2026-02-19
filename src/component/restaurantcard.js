@@ -4,7 +4,6 @@ import UserContext from "../utils/UserContext";
 import { useDispatch } from "react-redux";
 import { addItem } from "../utils/RestaurandCartSlice";
 const RestaurantCard = (props) => {
-  console.log(props);
   const { resData } = props;
   const { cloudinaryImageId, name, cuisines, avgRating, sla } = resData.info; 
   const {user} = useContext(UserContext);
@@ -13,7 +12,7 @@ const RestaurantCard = (props) => {
     dispatch(addItem(resData));
   }
   return (
-    <div className="res-card w-[230px] p-3 m-2 my-3 bg-gray-200 hover:bg-gray-400">
+    <div className="res-card w-[230px] p-3 m-2 my-3 bg-gray-200 hover:bg-gray-400" data-testid = "res-card">
       <button className="relative ml-44 top-0 right-0 p-2 text-white rounded bg-black" onClick={()=>handleAddItem()}>Add</button>
       <img
       className="res-logo"

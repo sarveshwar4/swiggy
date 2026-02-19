@@ -1,16 +1,14 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router";
 import React from "react";
 import useStatus from "../utils/useStatus";
 import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 export const Header = () => {
   const [login, setlogin] = useState("login");
   const {user} = useContext(UserContext);
   const resCart = useSelector((store)=>store.resCart.items);
-  console.log(user);
   const status = useStatus();
-  console.log(status);
   return (
     <div className="header m-4 p-4 bg-yellow-100 flex justify-between shadow-lg">
       <div className="logo-container">
@@ -28,7 +26,6 @@ export const Header = () => {
           <li className="px-4"><Link to="/contact">Contact Us</Link></li>
           <li className="px-4"><Link to="/grocerry">Grocerry</Link></li>
           <li className="px-4"><Link to="/restaurantCart">RestaurantCart - {resCart.length}</Link></li>
-          {/* <li>Cart</li> */}
         </ul>
           <button className={`btn px-4 py-2 ${login == "login" ? "bg-blue-400" : "bg-red-400"} rounded`} onClick={()=>login == "login" ? setlogin("logout") :setlogin("login")}>{login}</button>
           <li className = "px-4 font-bold">{user.name}</li>

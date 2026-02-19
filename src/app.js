@@ -7,12 +7,12 @@ import Contact from "./component/Contact";
 import { Header } from "./component/header";
 import RestaurantMenu from "./component/RestaurantMenu";
 import RestaurantCart from "./component/RestaurantCart";
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
 import store from "./utils/appStore";
 
-const Grocerry = lazy(() => import("./component/grocerry"));
+const Grocerry = lazy(() => import("./component/grocerry/"));
 
 const AppLayout = () => {
   const [user, setUser] = React.useState({
@@ -30,7 +30,8 @@ const AppLayout = () => {
   );
 };
 
-const appRouter = createBrowserRouter([
+const appRouter = createBrowserRouter(
+  [
   {
     path: "/",
     element: <AppLayout />,
@@ -65,7 +66,14 @@ const appRouter = createBrowserRouter([
     ],
     errorElement: <Error />,
   },
-]);
+ ],
+ {
+    future: {
+      v7_startTransition: true,
+      v7_relativeSplatPath: true,
+    },
+  }
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<RouterProvider router={appRouter} />);

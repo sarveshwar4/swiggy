@@ -31,16 +31,16 @@ const Body = () => {
     <div className="body ">
       <div className="filter flex items-center">
         <div className="search-bar m-4 p-4 flex items-center">
-          <input type = 'text'value = {SearchText} className="px-4 py-2 search-filter border border-solid border-black rounded-lg" placeholder="type-here" onChange={
+          <input type = 'text'value = {SearchText} data-testid = "inputBox" className="px-4 py-2 search-filter border border-solid border-black rounded-lg" placeholder="type-here" onChange={
           (e)=>setSearchText(e.target.value)}/>
 
-        <button className="m-3 px-4 py-2 bg-green-200 rounded-lg" onClick={()=>{
+        <button className="m-3 px-4 py-2 bg-green-200 rounded-lg" data-testid="searchBtn" onClick={()=>{
            const filteredList = listOfRestaurants.filter((restaurants)=>restaurants.info.name.toLowerCase().includes(SearchText.toLowerCase()));
            setfilteredList(filteredList);
         }}>Search</button>
         </div>
         <div>
-          <button className="filter px-4 py-2 bg-gray-300 rounded-lg" onClick={() => {
+          <button className="filter px-4 py-2 bg-gray-300 rounded-lg"  data-testid = "topRatedButton" onClick={() => {
             const filterList = listOfRestaurants.filter(
             (res) => res.info.avgRating > 4);
             setfilteredList(filterList);
